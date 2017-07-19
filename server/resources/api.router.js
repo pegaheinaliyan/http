@@ -5,7 +5,7 @@ let
   controller = require('./api.controller.js');
 
 router.get('/', controller.hello);
-// router.get('/quotes/random' /*insert controller method here*/);
+router.get('/quotes/random', controller.getRandomQuote);
 router.route('/quotes')
   .get(controller.getQuotes)
   // .put(/*insert controller method here*/)

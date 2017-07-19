@@ -104,7 +104,7 @@ describe('GET /api/quotes', () => {
   });
 });
 
-xdescribe('GET /api/quotes/random', () => {
+describe('GET /api/quotes/random', () => {
   let status, response;
 
   before(done => {
@@ -125,14 +125,14 @@ xdescribe('GET /api/quotes/random', () => {
     done();
   });
 
-  xit('should be a JSON object.', done => {
+  it('should be a JSON object.', done => {
     response.should.be.a('string');
     response = JSON.parse(response);
     response.should.be.an('object');
     done();
   });
 
-  xit('should be random', done => {
+  it('should be random', done => {
     let a, b;
     chai.request(app)
       .get('/api/quotes/random')
