@@ -26,9 +26,8 @@ module.exports = {
     });
  },
  getRandomQuote(req, res) {
-   random((data)=> {
-  //  const randomData = random() ;
-  //  send(res, OK, randomData);
+     random((data)=> {
+     send(res, OK, {data});
    })
  }
 }
@@ -37,20 +36,16 @@ module.exports = {
 
 function read (cb) { // read the quotes text file into memory
   // your code here!
-  var result = []
-  fs.readFile(QUOTES, 'utf-8', (errorobj, bigStr)=> {
+  let result = []
+  fs.readFile(QUOTES, TYPE, (errorobj, bigStr)=> {
     if(errorobj) console.log(errorsobj)
-    var quatePairs = bigStr.split('\n'); 
+    let quotePairs = bigStr.split('\n');
 
-    quatePairs.forEach((pair)=> {
-      const index = pair.indexOf('~');
-      const text = pair.substring(0,index-1);
-      const author = pair.substring(index + 1, pair.length-1);
-      let quote = {};
-      quote.text = text;
-      quote.author = author;
-      result.push(quote);
+    quotePairs.forEach((pair)=> {
+      formatTextAuthor(pair);
+      result.push(formatTextAuthor(pair));
     });
+
     cb(result);        
   });
 }
@@ -61,26 +56,28 @@ function send (res, code, data, json = true) { //send a response
 
 function random (cb) { // read the quotes text file into memory
   // your code here!
-  var result = []
-  fs.readFile(QUOTES, 'utf-8', (errorobj, bigStr)=> {
+  let result = []
+  fs.readFile(QUOTES, TYPE, (errorobj, bigStr)=> {
     if(errorobj) console.log(errorsobj)
-    var quatePairs = bigStr.split('\n'); 
+    let quatePairs = bigStr.split('\n');
 
     quatePairs.forEach((pair)=> {
-      const index = pair.indexOf('~');
-      const text = pair.substring(0,index-1);
-      const author = pair.substring(index + 1, pair.length-1);
-      let quote = {};
-      quote.text = text;
-      quote.author = author;
-      result.push(quote);
+      formatTextAuthor(pair);
+      result.push(formatTextAuthor(pair));
     });
 
-// console.log('result',result)
-  const length = result.length;
-  const randomIndex = Math.floor(Math.random() * length);
-  // console.log('randomIndex',randomIndex);
-  // console.log('resultrandom',result[randomIndex]);
-  cb(result[randomIndex]);  
+    const length = result.length;
+    const randomIndex = Math.floor(Math.random() * length);
+    cb(result[randomIndex]);
   });
+}
+
+function formatTextAuthor (pair) {
+  const index = pair.indexOf('~');
+  const text = pair.substring(0,index - 1);
+  const author = pair.substring(index + 1, pair.length - 1);
+  let quote = {};
+  quote.text = text;
+  quote.author = author;
+  return quote;
 }
