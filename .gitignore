@@ -1,0 +1,8 @@
+node_modules/
+.DS_Store
+
+# IntelliJ
+*.ipr
+*.iml
+*.iws
+.idea/
