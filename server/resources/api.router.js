@@ -6,8 +6,8 @@ let
 
 router.get('/', controller.hello);
 // router.get('/quotes/random' /*insert controller method here*/);
-// router.route('/quotes')
-  // .get(/*insert controller method here*/)
+router.route('/quotes')
+  .get(controller.getQuotes)
   // .put(/*insert controller method here*/)
   // .post(/*insert controller method here*/);
 

@@ -16,6 +16,7 @@ app.listen(PORT, () => console.log(
 
 chai.use(chaiHttp);
 
+
 describe('GET /api', () => {
   let status, response;
 
@@ -44,7 +45,7 @@ describe('GET /api', () => {
 
 });
 
-xdescribe('GET /api/quotes', () => {
+describe('GET /api/quotes', () => {
   let status, response, quotes;
 
   before(done => {
@@ -60,12 +61,12 @@ xdescribe('GET /api/quotes', () => {
       });
   });
 
-  xit('should return status 200.', done => {
+  it('should return status 200.', done => {
     status.should.equal(200);
     done();
   });
 
-  xit('should be a JSON object.', done => {
+  it('should be a JSON object.', done => {
     response.should.be.a('string');
     response = JSON.parse(response);
     response.should.be.an('object');
@@ -73,13 +74,13 @@ xdescribe('GET /api/quotes', () => {
   });
 
 
-  xit('should have a "quotes" property containing an array.', done => {
+  it('should have a "quotes" property containing an array.', done => {
     response.should.have.a.property('quotes').that.is.an('array');
     quotes = response.quotes;
     done();
   });
 
-  xit('should contain only quotes with both "text" and an "author".', done => {
+  it('should contain only quotes with both "text" and an "author".', done => {
     for(let quote of quotes) {
       quote.should.be.an('object');
       quote.should.have.a.property('text');
@@ -90,7 +91,7 @@ xdescribe('GET /api/quotes', () => {
     done();
   });
 
-  xit('should allow an author parameter.', done => {
+  it('should allow an author parameter.', done => {
     chai.request(app)
       .get('/api/quotes?author=\'\'')
       .set(
