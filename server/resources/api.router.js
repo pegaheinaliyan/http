@@ -7,9 +7,8 @@ let
 router.get('/', controller.hello);
 router.get('/quotes/random', controller.getRandomQuote);
 router.route('/quotes')
-  .get(controller.getQuotes)
-  // .put(/*insert controller method here*/)
-  // .post(/*insert controller method here*/);
+  .get(controller.getQuotes)  // .put(/*insert controller method here*/)
+  .post(controller.overwriteQuote);
 
 module.exports = router;
 

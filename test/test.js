@@ -109,7 +109,7 @@ describe('GET /api/quotes/random', () => {
 
   before(done => {
     chai.request(app)
-      .get('/api/quotes')
+      .get('/api/quotes/random')
       .set(
         'Content-Type', 'application/json'
       )
@@ -156,7 +156,7 @@ describe('GET /api/quotes/random', () => {
 });
 
 
-xdescribe('POST /api/quotes', () => {
+describe('POST /api/quotes', () => {
   let status, response;
 
   before(done => {
@@ -177,7 +177,7 @@ xdescribe('POST /api/quotes', () => {
     done();
   });
 
-  xit('should overwrite the existing quote file.', done => {
+  it('should overwrite the existing quote file.', done => {
     chai.request(app)
       .get('/api/quotes')
       .set(
@@ -189,7 +189,7 @@ xdescribe('POST /api/quotes', () => {
       });
   });
 
-  xit('should return status 400 if "text" is empty.', done => {
+  it('should return status 400 if "text" is empty.', done => {
     chai.request(app)
       .post('/api/quotes')
       .set(
