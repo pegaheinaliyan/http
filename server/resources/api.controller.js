@@ -5,7 +5,8 @@ const _ = require('lodash')
 
 const QUOTES = './server/data/quotes.txt',
   TYPE = 'utf8',
-  OK = 200;
+  OK = 200,
+  ERROR=400;
 
 let cache = null;
 
@@ -54,7 +55,7 @@ module.exports = {
     
     }else{
       console.log('else working:/')
-      send(res,OK,'ERROR')
+      send(res,ERROR,'ERROR');
     }
     //  update((data)=>{
     //    console.log(data)
