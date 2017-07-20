@@ -17,6 +17,7 @@ module.exports = {
   },
   getQuotes(req, res) {
     read((data) => {
+      console.log("-------- iam called")
       let filtered = _.filter(data, (quote) => {
         if (req.query.author) {
           return req.query.author === quote.author;
@@ -38,16 +39,22 @@ module.exports = {
     let body = [];
     if (quotes.every(quote => quote.text.length > 0)) {
       for (var quote of quotes) {
-        let line = quote.text + '~' + quote.author;
+        let line = quote.text + '~' + quote.author ;
+       // console.log('line',line);
         body.push(line);
       }
-      fs.writeFile(QUOTES,body.join('\n'),(error) => {
+      var txt = body.join('\n')
+      fs.writeFile(QUOTES,txt,(error) => {
+        console.log(txt);
         console.log("------------------- here")
         if(error) throw error;
         send(res, OK);
         console.log("------------------- done")
       })
     
+    }else{
+      console.log('else working:/')
+      send(res,OK,'ERROR')
     }
     //  update((data)=>{
     //    console.log(data)
@@ -116,8 +123,8 @@ function random (cb) { // read the quotes text file into memory
 
 function formatTextAuthor (pair) {
   const index = pair.indexOf('~');
-  const text = pair.substring(0,index - 1);
-  const author = pair.substring(index + 1, pair.length - 1);
+  const text = pair.substring(0,index);
+  const author = pair.substring(index + 1, pair.length);
   let quote = {};
   quote.text = text;
   quote.author = author;

@@ -184,6 +184,9 @@ describe('POST /api/quotes', () => {
         'Content-Type', 'application/json'
       )
       .end((err, res) => {
+       // console.log(JSON.parse(res.text).quotes);
+        console.log("---------")
+       // console.log(quotes)
         JSON.parse(res.text).quotes.should.deep.equal(quotes);
         done();
       });
